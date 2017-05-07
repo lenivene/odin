@@ -149,7 +149,7 @@ function odin_related_posts( $display = 'category', $qty = 4, $title = '', $thum
 		if ( $related->have_posts() ) {
 
 			$layout = '<div id="related-post">';
-			$layout .= '<h3>' . esc_attr( $title ) . '</h3>';
+			$layout .= '<h3>' . esc_html( $title ) . '</h3>';
 			$layout .= ( $thumb ) ? '<div class="row">' : '<ul>';
 
 			while ( $related->have_posts() ) {
@@ -161,18 +161,18 @@ function odin_related_posts( $display = 'category', $qty = 4, $title = '', $thum
 					if ( has_post_thumbnail() ) {
 						$img = get_the_post_thumbnail( get_the_ID(), 'thumbnail' );
 					} else {
-						$img = '<img src="' . get_template_directory_uri() . '/core/assets/images/odin-thumb-placeholder.jpg" alt="' . get_the_title() . '">';
+						$img = '<img src="' . get_template_directory_uri() . '/core/assets/images/odin-thumb-placeholder.jpg" alt="' . esc_attr( get_the_title() ) . '">';
 					}
 					// Filter to replace the image.
 					$image = apply_filters( 'odin_related_posts_thumbnail', $img );
 
 					$layout .= '<span class="thumb">';
-					$layout .= sprintf( '<a href="%s" title="%s" class="thumbnail">%s</a>', esc_url( get_permalink() ), get_the_title(), $image );
+					$layout .= sprintf( '<a href="%s" title="%s" class="thumbnail">%s</a>', esc_url( get_permalink() ), esc_attr( get_the_title() ), $image );
 					$layout .= '</span>';
 				}
 
 				$layout .= '<span class="text">';
-				$layout .= sprintf( '<a href="%1$s" title="%2$s">%2$s</a>', esc_url( get_permalink() ), get_the_title() );
+				$layout .= sprintf( '<a href="%1$s" title="%2$s">%2$s</a>', esc_url( get_permalink() ), esc_attr( get_the_title() ) );
 				$layout .= '</span>';
 
 				$layout .= ( $thumb ) ? '</div>' : '</li>';
